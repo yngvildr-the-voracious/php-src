@@ -1,0 +1,15 @@
+### Apache mod_php: 7.4.21-orig (7.4.21)
+worker pid before: 7 / 7 (same child: yes)
+OOM while parsing 6MB POST         curl_exit=0   http=200  body=
+worker pid after parse-OOM: 7 -> SAME worker kept serving
+OOM inside script                  curl_exit=0   http=200  body=<br /> <b>Fatal error</b>: Allowed memory size of 4194304 bytes exhausted (tried to allocate 33554464 bytes) in <b>/dak/www/oom.php</b> on line <b>3</b><br /> SHUTDOWN HANDLER RAN 
+worker pid after script-OOM: 7 -> SAME worker kept serving
+--- functional checks on the (possibly respawned) worker ---
+GET nested arrays (32 keys)        curl_exit=0   http=200  body=count=51 a=16 m=16 7f13addbb3c4dc616ab76de1f37e253d 
+POST urlencoded nested             curl_exit=0   http=200  body={"a":"1","b":["2","3"],"c":{"x":{"y":"4"}}} 
+multipart upload 1MiB              curl_exit=0   http=200  body=error=0 size=1048576 uploaded=true 
+session request 1                  curl_exit=0   http=200  body=session n=1 
+session request 2                  curl_exit=0   http=200  body=session n=2 
+--- Apache error_log (startup/shutdown notices removed) ---
+[Fri Oct 23 09:37:38.136814 2026] [mpm_prefork:info] [pid 4] AH00164: Server built: May 30 2023 14:01:11
+[Fri Oct 23 09:37:38.244556 2026] [core:info] [pid 4] AH00096: removed PID file /tmp/httpd-7.4.21-orig.pid (pid=4)

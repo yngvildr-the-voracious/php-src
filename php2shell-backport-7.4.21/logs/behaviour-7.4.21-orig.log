@@ -1,0 +1,26 @@
+### 7.4.21-orig: 7.4.21
+
+--- T1 max_multipart_body_parts=3, 10 fields (new ini from the fix) ---
+exit=0
+stdout:  fields=10 
+stderr: 
+
+--- T2 duplicate Content-Disposition + 300 junk part headers ---
+exit=0
+stdout:  {"first":"hello"} 
+stderr: 
+
+--- T3 file upload, 1 MiB ---
+exit=0
+stdout:  error=0 size=1048576 uploaded=true 
+stderr: 
+
+--- T5 memory_limit hit WHILE PARSING the request (before the script runs) ---
+exit=255
+stdout: 
+stderr: 
+
+--- T7 memory_limit hit INSIDE the script (ordinary app-level OOM) ---
+exit=255
+stdout:  Fatal error: Allowed memory size of 8388608 bytes exhausted (tried to allocate 33554464 bytes) in /dak/www/oom.php on line 3 SHUTDOWN HANDLER RAN 
+stderr: 

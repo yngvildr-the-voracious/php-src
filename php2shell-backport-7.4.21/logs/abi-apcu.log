@@ -1,0 +1,32 @@
+### 1. ABI identifiers (an extension refuses to load if these differ)
+7.4.21-orig: PHP API => 20190902 PHP Extension => 20190902 Zend Extension => 320190902 Zend Extension Build => API320190902,NTS PHP Extension Build => API20190902,NTS 
+7.4.21-fix: PHP API => 20190902 PHP Extension => 20190902 Zend Extension => 320190902 Zend Extension Build => API320190902,NTS PHP Extension Build => API20190902,NTS 
+7.4.33-fix: PHP API => 20190902 PHP Extension => 20190902 Zend Extension => 320190902 Zend Extension Build => API320190902,NTS PHP Extension Build => API20190902,NTS 
+
+### 2. Exported symbols of libphp7.so (mod_php): removed (<) / added (>)
+-- 7.4.21-orig -> 7.4.21-fix: 0 removed, 2 added
+  > zend_mm_safe_error_ex
+  > zend_new_array_singleton
+-- 7.4.21-orig -> 7.4.33-fix: 0 removed, 2 added
+  > zend_mm_safe_error_ex
+  > zend_new_array_singleton
+
+### 3. Installed headers that differ (what a PECL extension compiles against)
+Files Zend/zend_API.h
+Files Zend/zend_alloc.h
+Files Zend/zend_hash.h
+Files Zend/zend_multiply.h
+Files Zend/zend_string.h
+Files Zend/zend_types.h
+Files Zend/zend_vm_def.h
+Files Zend/zend_vm_execute.h
+Files main/build-defs.h
+Files main/php_config.h
+-- struct/union/typedef lines touched in those headers:
+  none
+
+### 4. APCu compiled once, loaded everywhere
+apcu.so built against 7.4.21-orig: 74f2017b4f2211cf…
+7.4.21-orig: loaded v5.1.21 fetch={"a":[1,2]} | Tests skipped : 11 ( 16.4%) -------- Tests failed : 0 ( 0.0%) ( 0.0%) Tests passed : 56 ( 83.6%) (100.0%) 
+7.4.21-fix: loaded v5.1.21 fetch={"a":[1,2]} | Tests skipped : 11 ( 16.4%) -------- Tests failed : 0 ( 0.0%) ( 0.0%) Tests passed : 56 ( 83.6%) (100.0%) 
+7.4.33-fix: loaded v5.1.21 fetch={"a":[1,2]} | Tests skipped : 11 ( 16.4%) -------- Tests failed : 0 ( 0.0%) ( 0.0%) Tests passed : 56 ( 83.6%) (100.0%) 
